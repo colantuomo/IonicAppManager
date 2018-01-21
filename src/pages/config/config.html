@@ -1,0 +1,36 @@
+<ion-content>
+
+  <ion-slides pager>
+    <ion-slide *ngFor="let item of sabores">
+      <ion-card class="card-itens">
+        <img class="item-img" src="{{item.imgsrc}}" />
+        <ion-card-content>
+          <ion-card-title>
+            {{item.title}}
+          </ion-card-title>
+          <ion-item *ngFor="let sb of item.items">
+            {{sb.saborTitulo}} | {{sb.preco | currency: 'R$'}}
+          </ion-item>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-grid text-center>
+        <ion-row>
+          <ion-col>
+            <div>
+              <button ion-button block>Novo Sabor</button>
+            </div>
+          </ion-col>
+          <ion-col>
+            <div>
+              <button ion-button block color="light">Preço Unitário</button>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-slide>
+  </ion-slides>
+
+
+
+</ion-content>

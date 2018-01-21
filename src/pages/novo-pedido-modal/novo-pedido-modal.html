@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>NovoPedidoModal</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-item>
+    <ion-label fixed>Quantidade</ion-label>
+    <ion-input text-right type="text" [(ngModel)]="qntd"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>Item</ion-label>
+    <ion-select [(ngModel)]="item" interface="popover">
+      <ion-option *ngFor="let item of itens">{{item.title}}
+      </ion-option>
+    </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-label>Sabor</ion-label>
+    <ion-select [(ngModel)]="sabor" interface="popover">
+      <ion-option *ngFor="let sabor of sabores">
+        {{sabor.saborTitulo}}
+      </ion-option>
+    </ion-select>
+  </ion-item>
+  <button ion-button block (click)="novoItem()">Salvar</button>
+  <button ion-button block (click)="closeModal()">Cancelar</button>
+</ion-content>
