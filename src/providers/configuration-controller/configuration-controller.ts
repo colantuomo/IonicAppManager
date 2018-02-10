@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ItemModel } from "../../models/ItemModel";
 import { SaborModel } from "../../models/SaborModel";
+import { PedidoModel } from '../../models/PedidoModel';
 
 @Injectable()
 export class ConfigurationControllerProvider {
@@ -25,9 +26,20 @@ export class ConfigurationControllerProvider {
     this.valorUnitario = novoValor;
   }
 
-  getValorUnitario() {
-    console.log("getValorUnitario");
-    return this.valorUnitario;
+  getValorUnitario(pedido: PedidoModel) {
+    console.log("pedido: "+pedido.itemName+" "+pedido.itemSabor);
+    for(let item in this.itens){
+      console.log("item: "+this.itens[item].title);
+      if(this.itens[item].title.trim() == pedido.itemName.trim()){
+        console.log("Deu match!");
+        for(let it in this.itens[item].items){
+          if(pedido.itemSabor.trim() == this.itens[item].items[it].saborTitulo.trim()){
+            console.log("valor do sabor: "+this.itens[item].items[it].preco);
+            return this.itens[item].items[it].preco;
+          }
+        }
+      }
+    }
   }
 
   addNovoItem() {

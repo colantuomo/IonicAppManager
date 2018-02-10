@@ -12,7 +12,6 @@ export class ConfigPage {
   valorUnitario: number = 0;
   constructor(public navCtrl: NavController, public config: ConfigurationControllerProvider) {
     this.sabores = config.getItens();
-    this.valorUnitario = config.getValorUnitario();
   }
 
 }

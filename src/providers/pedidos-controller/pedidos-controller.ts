@@ -4,40 +4,31 @@ import { PedidoModel } from "../../models/PedidoModel";
 
 @Injectable()
 export class PedidosControllerProvider {
-  item: any = [];
-  total: number = 0;
-  pedido: any = [PedidoModel];
+  pedidos: any = [];
   constructor(public configCtrl: ConfigurationControllerProvider) {
     console.log('Hello itemControllerProvider Provider');
   }
-  novoItem(item: any) {
-    let valor = this.configCtrl.getValorUnitario();
-    item["valor"] = item.qntd * valor;
-    this.total += item.valor;
-    console.log(item);
-    this.item.push(item);
-    console.log("size: " + this.item.length);
+  novoItem(item: PedidoModel) {
+    item.valorTotal = this.configCtrl.getValorUnitario(item);
+    this.pedidos.push(item);
   }
   deleteItem(item: any) {
-    var i = this.item.indexOf(item);
-    this.total -= item.valor;
+    var i = this.pedidos.indexOf(item);
     if (i != -1) {
-      this.item.splice(i, 1);
+      this.pedidos.splice(i, 1);
     }
   }
   todosItens() {
-    console.log("TOTAL ARRAY: " + this.item.length);
-    return this.item;
+    return this.pedidos;
   }
   valorTotaldosItens(){
-    console.log("VALOR: "+this.total);
-    return this.total;
+    //return this.total;
   }
 
   // Nova lista de items = Pedidos;
 
-  novoPedido(pedido:any){
-    this.pedido.push(pedido);
+  novoPedido(pedido:PedidoModel){
+    this.pedidos.push(pedido);
   }
 
 }

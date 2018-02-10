@@ -13,7 +13,7 @@ export class HomePage {
   @ViewChild('pedidosSlide') slider: Slides;
   pedidos: any = [];
   totalPedido: number = 0;
-  novoPedido: any = [];
+  novoPedido: any = null;
   constructor(public navCtrl: NavController, public modalCtrl: ModalController, public pedidosCtrl: PedidosControllerProvider) {
   }
 
@@ -27,18 +27,17 @@ export class HomePage {
   }
 
   loadItens() {
+    this.totalPedido = 0;
     this.pedidos = this.pedidosCtrl.todosItens();
-    this.totalPedido = this.pedidosCtrl.valorTotaldosItens();
+    for(let it in this.pedidos){
+      this.totalPedido += this.pedidos[it].valorTotal * this.pedidos[it].qntd;
+    }
+    console.log("loadItens: "+this.pedidos);
   }
 
   novoItem() {
     let modal = this.modalCtrl.create(NovoPedidoModalPage);
     modal.onDidDismiss(data => {
-      if(data != null){
-        this.novoPedido.push(data);
-        this.totalPedido
-      }
-
       this.loadItens();
     });
     modal.present();

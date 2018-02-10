@@ -4,6 +4,7 @@ import { PedidosControllerProvider } from "../../providers/pedidos-controller/pe
 import { ConfigurationControllerProvider } from "../../providers/configuration-controller/configuration-controller";
 import { SaborModel } from "../../models/SaborModel";
 import { PedidoModel } from "../../models/PedidoModel";
+import { ItemModel } from '../../models/ItemModel';
 
 @IonicPage()
 @Component({
@@ -23,16 +24,24 @@ export class NovoPedidoModalPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad NovoPedidoModalPage');
-    this.itens = this.configCtrl.getItens();    
-    
+    this.itens = this.configCtrl.getItens(); 
+    console.log(this.itens);
   }
+
+  matchSubItens(){
+    for(let item in this.itens){
+      if(this.itens[item].title.trim() == this.item.trim() ){
+        this.sabores = this.itens[item].items;
+      }
+    }
+  }
+
   closeModal() {
     this.viewCtrl.dismiss(null);
   }
   novoItem() {
-    console.log(this.sabor);
-    // let pedidoModel = new PedidoModel(this.item, this.sabor, this.qntd);
-    // this.viewCtrl.dismiss(pedidoModel);
+     this.pedidosCtrl.novoItem(new PedidoModel(this.item, this.sabor, this.qntd, -1));
+     this.closeModal();
   }
 
 }

@@ -7,11 +7,11 @@
 <ion-content padding>
   <ion-item>
     <ion-label fixed>Quantidade</ion-label>
-    <ion-input text-right type="text" [(ngModel)]="qntd"></ion-input>
+    <ion-input text-right type="number" [(ngModel)]="qntd"></ion-input>
   </ion-item>
   <ion-item>
     <ion-label>Item</ion-label>
-    <ion-select [(ngModel)]="item" interface="popover">
+    <ion-select [(ngModel)]="item" interface="popover" (ionChange)="matchSubItens()">
       <ion-option *ngFor="let item of itens">{{item.title}}
       </ion-option>
     </ion-select>
